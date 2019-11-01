@@ -18,6 +18,7 @@
     }
 
     .logo-heading {
+      position: relative;
       @media @mobile {
         font-size: 3rem;
       }
@@ -42,3 +43,51 @@
     }
   }
 } // .main-navigation
+
+.logoAnimate {
+  animation-name: bounceInLeft;
+  animation-duration: 1.5s;
+}
+
+@keyframes slideIn {
+  from {
+    left: -100%;
+  }
+
+  to {
+    left: 0%;
+  }
+}
+
+// bounceInLeft animation from https://daneden.github.io/animate.css/
+@keyframes bounceInLeft {
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+    transform: translate3d(5px, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
