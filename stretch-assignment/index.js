@@ -1,42 +1,105 @@
 window.addEventListener('load', event => {
-    const red = document.querySelector('.block--red');
-    const blue = document.querySelector('.block--blue');
-    const green = document.querySelector('.block--green');
-    const pink = document.querySelector('.block--pink');
-    const gray = document.querySelector('.block--gray');
     const blocks = document.querySelector('.blocks');
     const ships_array = [...document.querySelectorAll('.block')];
+    const position_from_top_array = [0, 120, 240, 360, 480];
+    const engineOn = "radial-gradient(ellipse 9px 18px at 38% 82%, orange 0%, orange 99%, transparent 100%), radial-gradient(ellipse 9px 18px at 60% 82%, orange 0%, orange 99%, transparent 100%)";
+    const travelLimit = 400; // limit in pixels
 
-    function moveShipToTop(array, prevPosition, newPosition) {
-        if (prevPosition > newPosition) {
-            // remove prevPosition element (hold in dummy variable)
-            // unshift dummy variable to front of array
-            let tempVar = array[prevPosition];
-            array.splice(prevPosition, 1);
-            array.unshift(tempVar);
-        }
+    blocks.style.position = 'relative'; // lets the blocks inside of it have absolute positioning relative to this div
+
+    // initialize ship positions
+    for (let j = 0; j < ships_array.length; j++) {
+        ships_array[j].style.position = 'absolute';
+        ships_array[j].style.top = position_from_top_array[j] + 'px';
+        ships_array[j].style.left = '0px';
     }
 
     ships_array.forEach(ship => {
-        ship.addEventListener('click', event => {
-            const currentPosition = ships_array.indexOf(event.target)
-            console.log(ships_array);
-            moveShipToTop(ships_array, currentPosition, 0);
-            console.log(ships_array);
-            blocks.innerHTML = '';
-            ships_array.forEach(ship => blocks.appendChild(ship))
+        function updateShipPositionRight(element) {
+            let currentPosition = Number(element.style.left.slice(0, element.style.left.length - 2));
+            element.style.transition = 'all 0.5s ease';
+            currentPosition += 10;
+            element.style.transform = 'rotate(90deg)';
+            const style = getComputedStyle(element);
+            let background = style.background;
+            background = background.replace('border-box rgba(0, 0, 0, 0)', 'border-box');
+            background = background.replace(', rgba(0, 0, 0, 0) linear', ', linear');
+            background += `, ${engineOn}`
+            element.style.background = background;
+            element.style.left = currentPosition + 'px';
+        }
+
+        function updateShipPositionLeft(element) {
+            let currentPosition = Number(element.style.left.slice(0, element.style.left.length - 2));
+            element.style.transition = 'all 0.5s ease';
+            currentPosition -= 10;
+          element.style.transform = 'rotate(-90deg)';
+          element.style.left = currentPosition + 'px';
+        }
+
+        let isMouseUp = true;
+        ship.onmouseup = function() {
+            isMouseUp = true;
+        }
+
+        ship.onmousedown = function() {
+            isMouseUp = false;
+        }
+
+        ship.addEventListener('mousedown', event => {
+            const timer = setInterval(() => {
+                let posInt = Number(event.target.style.left.slice(0, event.target.style.left.length - 2));
+                if (posInt < travelLimit && !isMouseUp) {
+                    updateShipPositionRight(event.target)
+                } else {
+                    console.log('Ship max distance reached! Please turn around.');
+                }
+            }, 100);
+
+            ship.addEventListener('mouseup', (e) => {
+                clearInterval(timer);
+                const timer2 = setInterval(() => {
+                    let posInt2 = Number(e.target.style.left.slice(0, e.target.style.left.length - 2));
+                    if (posInt2 > 0) {
+                        updateShipPositionLeft(e.target);
+
+                        if (!isMouseUp) {
+                            e.target.style.removeProperty('background');
+                            clearInterval(timer2);
+                        }
+                    } else {
+                        e.target.style.transform = 'rotate(0deg)';
+                        e.target.style.removeProperty('background');
+                        console.log('I should be stopped');
+                        clearInterval(timer2);
+                    }
+                }, 100);
+                e.stopPropagation();
+            })
         })
 
-        // https://www.kirupa.com/html5/press_and_hold.htm
-        ship.addEventListener('mousedown', event => {
-            console.log('here');
-            function updateShipPosition() {
-                let currentPosition = 0;
-                currentPosition += 5;
-
-                event.target.style.left = currentPosition + 'px';
+        ship.addEventListener('click', event => {
+            let posNumber = Number(event.target.style.left.slice(0, event.target.style.left.length - 2));
+            // only moves to top when blocks are in original positions (ie aren't moving horizontally)
+            if (posNumber === 0) {
+                ships_array.forEach(block => {
+                    // move blocks above target down
+                    if (event.target.style.top > block.style.top) {
+                        const posNum = Number(block.style.top.slice(0, block.style.top.length - 2));
+                        block.style.transition = 'all 0.5s ease';
+                        block.style.top = (posNum +  position_from_top_array[1]) + 'px';
+                    }
+                })
+                // move target block to top
+                event.target.style.transition = 'all 0.5s ease';
+                const style = getComputedStyle(event.target);
+                let background = style.background;
+                background = background.replace('border-box rgba(0, 0, 0, 0)', 'border-box');
+                background = background.replace(', rgba(0, 0, 0, 0) linear', ', linear');
+                background += `, ${engineOn}`
+                event.target.style.background = background;
+                event.target.style.top = position_from_top_array[0] + 'px';
             }
-            window.setInterval(updateShipPosition(), 100);
         })
     })
 })

@@ -16,21 +16,52 @@ body {
 }
 
 .block--red {
-  background-color: red;
+  background: linear-gradient(-45deg, lightblue 45%, transparent 45%) 0% 75% / 25px 25px no-repeat,
+    radial-gradient(18px 18px at 50% 38%, white 49%, transparent 50%),
+    radial-gradient(18px 18px at 50% 65%, white 49%, transparent 50%),
+    linear-gradient(45deg, lightblue 45%, transparent 45%) 100% 75% / 25px 25px no-repeat,
+    linear-gradient(90deg, red, red) 50% 53% / 50px 60px no-repeat,
+    linear-gradient(45deg, lightblue 45%, transparent 45%) 70% -10% / 30px 30px no-repeat,
+    linear-gradient(-45deg, lightblue 45%, transparent 45%) 30% -10% / 30px 30px no-repeat;
 }
 
 .block--blue {
-  background-color: blue;
+  background: linear-gradient(-45deg, dodgerblue 45%, transparent 45%) 0% 75% / 25px 25px no-repeat,
+    radial-gradient(18px 18px at 50% 38%, white 49%, transparent 50%),
+    radial-gradient(18px 18px at 50% 65%, white 49%, transparent 50%),
+    linear-gradient(45deg, dodgerblue 45%, transparent 45%) 100% 75% / 25px 25px no-repeat,
+    linear-gradient(90deg, blue, blue) 50% 53% / 50px 60px no-repeat,
+    linear-gradient(45deg, dodgerblue 45%, transparent 45%) 70% -10% / 30px 30px no-repeat,
+    linear-gradient(-45deg, dodgerblue 45%, transparent 45%) 30% -10% / 30px 30px no-repeat;
 }
 
 .block--green {
-  background-color: green;
+  background: linear-gradient(-45deg, darkgreen 45%, transparent 45%) 0% 75% / 25px 25px no-repeat,
+    radial-gradient(18px 18px at 50% 38%, white 49%, transparent 50%),
+    radial-gradient(18px 18px at 50% 65%, white 49%, transparent 50%),
+    linear-gradient(45deg, darkgreen 45%, transparent 45%) 100% 75% / 25px 25px no-repeat,
+    linear-gradient(90deg, lightgreen, lightgreen) 50% 53% / 50px 60px no-repeat,
+    linear-gradient(45deg, darkgreen 45%, transparent 45%) 70% -10% / 30px 30px no-repeat,
+    linear-gradient(-45deg, darkgreen 45%, transparent 45%) 30% -10% / 30px 30px no-repeat;
 }
 
 .block--pink {
-  background-color: pink;
+  background: linear-gradient(-45deg, rebeccapurple 45%, transparent 45%) 0% 75% / 25px 25px no-repeat,
+    radial-gradient(18px 18px at 50% 38%, white 49%, transparent 50%),
+    radial-gradient(18px 18px at 50% 65%, white 49%, transparent 50%),
+    linear-gradient(45deg, rebeccapurple 45%, transparent 45%) 100% 75% / 25px 25px no-repeat,
+    linear-gradient(90deg, pink, pink) 50% 53% / 50px 60px no-repeat,
+    linear-gradient(45deg, rebeccapurple 45%, transparent 45%) 70% -10% / 30px 30px no-repeat,
+    linear-gradient(-45deg, rebeccapurple 45%, rgba(0,0,0,0) 45%) 30% -10% / 30px 30px no-repeat;
 }
 
 .block--gray {
-  background-color: gray;
+  background: 
+    linear-gradient(-45deg, red 45%, transparent 45%) 0% 75% / 25px 25px no-repeat, 
+    radial-gradient(18px 18px at 50% 38%, white 49%, transparent 50%), 
+    radial-gradient(18px 18px at 50% 65%, white 49%, transparent 50%), 
+    linear-gradient(45deg, red 45%, transparent 45%) 100% 75% / 25px 25px no-repeat, 
+    linear-gradient(90deg, gray, gray) 50% 53% / 50px 60px no-repeat, 
+    linear-gradient(45deg, red 45%, transparent 45%) 70% -10% / 30px 30px no-repeat, 
+    linear-gradient(-45deg, red 45%, transparent 45%) 30% -10% / 30px 30px no-repeat;
 }
