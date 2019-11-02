@@ -3,7 +3,18 @@ window.addEventListener('load', event => {
     const ships_array = [...document.querySelectorAll('.block')];
     const position_from_top_array = [0, 120, 240, 360, 480];
     const engineOn = "radial-gradient(ellipse 9px 18px at 38% 82%, orange 0%, orange 99%, transparent 100%), radial-gradient(ellipse 9px 18px at 60% 82%, orange 0%, orange 99%, transparent 100%)";
+    const stars = "rgba(255,255,255,0.0)";
     const travelLimit = 400; // limit in pixels
+
+    // for twinkling stars -- makes it kinda laggy, though
+    // used for reference: https://codepen.io/KyleShaver/pen/jARzzZ?editors=0110
+    for (let i = 0; i < 100; i++) {
+        let star = document.createElement('div');
+        star.classList.add('star');
+        star.style = 'animation: twinkle '+((Math.random()*5) + 5)+'s linear '+((Math.random()*5) + 5)+'s infinite; top: '+Math.random()*window.innerHeight+'px; left: '+Math.random()*window.innerWidth+'px;';
+        document.querySelector('.atmosphereContainer').append(star);
+      }
+
 
     blocks.style.position = 'relative'; // lets the blocks inside of it have absolute positioning relative to this div
 
