@@ -112,3 +112,175 @@
     }
   }
 }// home
+
+.modal {
+  visibility: hidden;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: @modal-bg;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+  }
+
+  .modal-img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    i {
+      position: absolute;
+      top: -22px;
+      right: -21px;
+      font-size: 2.5rem;
+      color: @font-awesome-icons;
+      cursor: pointer;
+    }
+
+    .modal-img {
+      height: auto;
+      border-radius: 10px;
+    }
+  }
+}
+
+.easter-egg-container {
+  visibility: hidden;
+  z-index: 2;
+  width: 75px;
+  height: auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  &.visible {
+    visibility: visible;
+    animation-duration: 5s, 0.5s, 5s, 0.5s, 5s, 0.5s, 5s;
+    animation-delay: 0s, 5s, 5.5s, 10.5s, 11s, 16s, 16.5s;
+    animation-name: easterEggBottom, easterEggBottomRightRotate, easterEggRight, easterEggTopRightRotate, easterEggTop,easterEggTopLeftRotate, easterEggLeft;
+
+    .easter-egg {
+      width: 100%;
+    }
+  }
+}
+
+// animations for Easter Egg animation
+@keyframes easterEggBottom {
+  0% {
+    bottom: 0;
+    left: 0;
+  }
+
+  100% {
+    bottom: 0;
+    left: calc(100% - 75px); 
+  }
+}
+
+@keyframes easterEggBottomRightRotate {
+  0% {
+    transform-origin: bottom left;
+    transform: rotate(0deg);
+    bottom: 0;
+    left: calc(100% - 75px);
+  }
+  100% {
+    transform-origin: bottom left;
+    transform: rotate(-90deg);
+    bottom: 0;
+    left: 100%;
+  }
+}
+
+@keyframes easterEggRight {
+  0% {
+    bottom: 0;
+    left: 100%;
+    transform-origin: bottom left;
+    transform: rotate(-90deg);
+  }
+  
+  100% {
+    bottom: calc(100% - 75px);
+    left: 100%;
+    transform-origin: bottom left;
+    transform: rotate(-90deg);
+  }
+}
+
+@keyframes easterEggTopRightRotate{
+  0% {
+    transform-origin: bottom left;
+    transform: rotate(-90deg);
+    bottom: calc(100% - 75px);
+    left: 100%;
+  }
+
+  100% {
+    transform-origin: bottom left;
+    transform: rotate(-180deg);
+    bottom: 100%;
+    left: 100%;
+  }
+}
+
+@keyframes easterEggTop {
+  0% {
+    bottom: 100%;
+    left: 100%;
+    transform-origin: bottom left;
+    transform: rotate(-180deg);
+  }
+
+  100% {
+    bottom: 100%;
+    left: 75px;
+    transform-origin: bottom left;
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes easterEggTopLeftRotate {
+  0% {
+    bottom: 100%;
+    left: 75px;
+    transform-origin: bottom left;
+    transform: rotate(-180deg);
+  }
+
+  100% {
+    bottom: 100%;
+    left: 0;
+    transform-origin: bottom left;
+    transform: rotate(-270deg);
+  }
+}
+
+@keyframes easterEggLeft {
+  0% {
+    bottom: 100%;
+    left: 0;
+    transform-origin: bottom left;
+    transform: rotate(-270deg);
+  }
+
+  100% {
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom left;
+    transform: rotate(-270deg);
+  }
+}
